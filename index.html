@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>guyX Encryption</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .hero.is-dark {
+            background-image: linear-gradient(to right, #771414a9, #db6312b7);
+        }
+        .hero .title, .hero .subtitle {
+            color: white;
+        }
+        .file.has-name .file-name {
+            max-width: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .button.is-link {
+            background-color: #3273dc;
+            color: white;
+        }
+        .button.is-link:hover {
+            background-color: #276cda;
+        }
+        .help {
+            font-size: 0.875em;
+            background-image: linear-gradient(to right, #ff0000, #00ff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+
+        }
+        .control .select select {
+            width: 100%;
+        }
+        .form .field {
+            margin-bottom: 1.5rem;
+        }
+        #content {
+            display: none;
+        }
+        #key-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #fff;
+        }
+        .img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="key-form">
+        <h2 class="title">Vui Lòng Nhập Key Của Bạn
+            ( LIên Hệ Admin Để Nhận Key! )
+        </h2>
+        <div class="field">
+            <label class="label">Key</label>
+            <div class="control">
+                <input class="input" type="password" id="access-key" placeholder="Nhập Key">
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button class="button is-link" onclick="checkKey()">Xác Nhận</button>
+            </div>
+        </div>
+        <p id="error-message" class="help is-danger" style="display: none;">Khóa không hợp lệ, vui lòng thử lại.</p>
+    </div>
+
+    <div id="content">
+        <section class="hero is-dark is-medium">
+            <div class="hero-body">
+                <div class="container">
+                    <div class="columns">
+                        <div class="column is-two-thirds-tablet is-three-quarters-desktop">
+                            <h1 class="title">guyX Encryption For FiveM</h1>
+                        </div>
+                        <div class="column is-three-quarters-mobile is-one-third-tablet is-one-quarter-desktop">
+                            <img src="images/logoenc.png" alt="xor">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-two-thirds-tablet is-half-desktop">
+                        <div class="form">
+                            <div class="field">
+                                <label class="label">Select .lua File</label>
+                                <div class="control">
+                                    <div class="file has-name">
+                                        <label class="file-label">
+                                            <input class="file-input" type="file" accept=".lua,.txt" id="file">
+                                            <span class="file-cta">
+                                                <span class="file-icon"><i class="fas fa-upload"></i></span>
+                                                <span class="file-label">Select File…</span>
+                                            </span>
+                                            <span class="file-name" id="file-name">No file selected...</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <p class="help">Your file will be processed locally and won´t be uploaded to any server or logged.</p>
+                            </div>
+
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="bytecode">
+                                    Save as bytecode
+                                </label>
+                                <p class="help">This will make the file larger (like 3x larger) and harder to deobfuscate.</p>
+                            </div>
+                            <div class="field">
+                                <label class="label">ByteCode Settings</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select id="settings">
+                                            <option value="number">Numbers (Makes it really large "x")</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <p class="help">Please select from the bytecode settings. Only 1 on this version, soon more!</p>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <button class="button is-link is-medium" id="encrypt">
+                                        <span class="file-icon"><i class="fas fa-download"></i></span>
+                                        Pack & Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-three-quarters-mobile is-one-third-tablet is-one-half-desktop">
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const validKeys = ["guyxteam", "abcdef", "789xyz"]; // Thay đổi các key này theo yêu cầu của bạn
+
+function checkKey() {
+    const userKey = document.getElementById('access-key').value;
+    if (validKeys.includes(userKey)) {
+        document.getElementById('key-form').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+    } else {
+        document.getElementById('error-message').style.display = 'block';
+    }
+}
+
+    </script>
+    <script src="bundle.js"></script>
+</body>
+</html>
